@@ -100,3 +100,16 @@ configuration (i.e. `cn=config` tree) gets recreated (based on the envrionment v
 
 * You should *never* change anything in the `cn=config` tree as it will be lost on the next restart.
 * Whenever you change `OPENLDAP_DOMAIN`, your "user-facing" database will not be accessible anymore.
+
+
+Development / Bugs
+------------------
+
+Development takes place on Github:
+
+https://github.com/ubivis-ch/docker-openldap
+
+Please report any issues to:
+
+https://github.com/ubivis-ch/docker-openldap/issues
+
