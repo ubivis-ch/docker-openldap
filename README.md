@@ -98,5 +98,5 @@ Notes
 Intentionally there is no configuration that needs to be saved between runs, as upon every container restart, the whole
 configuration (i.e. `cn=config` tree) gets recreated (based on the envrionment variables). This means two things:
 
-* You should *never* change anything in the "config" tree as it will be lots on the next restart.
+* You should *never* change anything in the `cn=config` tree as it will be lost on the next restart.
 * Whenever you change `OPENLDAP_DOMAIN`, your "user-facing" database will not be accessible anymore.
