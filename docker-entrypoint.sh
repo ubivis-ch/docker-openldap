@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# When not setting this, running slapd failes (with core dump)
+ulimit -n 1024
+
 if [ "$1" == "ssha" ]; then
     if [ "$#" -eq 2 ]; then
         plain="$2"
@@ -30,6 +33,7 @@ root_dn="cn=${OPENLDAP_USERNAME},${dc_string}"
 
 if [ -z "${OPENLDAP_PASSWORD}" ]; then
     root_dn_password=`tr -cd '[:alnum:]' < /dev/urandom | fold -w30 | head -n1`
+    root_dn_password_hash=`slappasswd -s "${root_dn_password}"`
     
     echo "Password for RootDN (${root_dn}): ${root_dn_password}"
 else
