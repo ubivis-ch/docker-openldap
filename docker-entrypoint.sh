@@ -18,7 +18,11 @@ if [ "$1" == "ssha" ]; then
 fi
 
 config_ldif=/etc/openldap/slapd.ldif
+config_dir=/etc/openldao/slapd.d
 config_log=/tmp/config.log
+
+user=ldap
+group=ldap
 
 if [ -z "${OPENLDAP_DOMAIN}" ]; then
     echo "Error: Missing mandatory OPENLDAP_DOMAIN!"
@@ -113,7 +117,10 @@ sed -i "s/openldap\/openldap-data/openldap/" $config_ldif
 #cat $config_ldif
 #exit 1
 
-slapadd -n 0 -F $CONFIG_DIR -l $config_ldif >$config_log 2>&1
+mkdir -p $config_dir
+rm -rf $config_dir/*
+
+slapadd -n 0 -F $config_dir -l $config_ldif >$config_log 2>&1
 
 if [ $? -ne 0 ]; then
     echo "ERROR: Initial configuration failed!"
@@ -124,10 +131,10 @@ fi
 
 rm $config_log
 
-chown -R $USER:$GROUP $CONFIG_DIR
+chown -R $user:$group $config_dir
 
 if [ "$#" -gt 0 ]; then
     exec "$@"
 else
-    slapd -d 32768 -u $USER -g $GROUP -F $CONFIG_DIR
+    slapd -d 32768 -u $user -g $group -F $config_dir
 fi

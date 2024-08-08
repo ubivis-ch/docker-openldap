@@ -10,9 +10,7 @@ RUN apk add --no-cache \
         openldap-clients \
         openldap-overlay-all
 
-RUN mkdir $CONFIG_DIR && \
-    chown $USER:$GROUP $CONFIG_DIR && \
-    rm /etc/openldap/slapd.conf && \
+RUN rm /etc/openldap/slapd.conf && \
     rmdir /var/lib/openldap/openldap-data
 
 COPY docker-entrypoint.sh /
