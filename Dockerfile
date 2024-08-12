@@ -1,9 +1,5 @@
 FROM alpine:latest
 
-ENV USER=ldap
-ENV GROUP=ldap
-ENV CONFIG_DIR=/etc/openldap/slapd.d
-
 RUN apk add --no-cache \
         openldap \
         openldap-back-mdb \
